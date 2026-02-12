@@ -1,16 +1,16 @@
-import { productos } from "../data/productos"
+import { productos as data, productos } from "../data/productos"
 import Producto from "../components/Producto"
 import useTienda from "../hooks/useTienda"
 
 export default function Inicio() {
 
-  const { autenticado } = useTienda()
+  const { categoriaActual } = useTienda()
   
-  console.log(autenticado)
+  const productos = data.filter(producto => producto.categoria_id === categoriaActual.id)
 
   return (
     <>
-    <h1 className="text-5xl font-bold ">Inicio</h1>
+    <h1 className="text-5xl font-bold ">{categoriaActual.nombre}</h1>
     <p className="text-lg my-10">
       Elige y personaliza tu pedido a continuacion.
     </p>
