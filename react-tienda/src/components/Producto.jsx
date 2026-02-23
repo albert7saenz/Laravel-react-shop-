@@ -1,7 +1,13 @@
 import { formateraDinero } from "../helpers"
+import useTienda from "../hooks/useTienda"
+
 
 export default function Producto({ producto}) {
+
+    const { handleClickModal, handleSetProducto } = useTienda();
     const { nombre, imagen, precio} = producto
+
+
   return (
     <div className="border p-3 shadow bg-white">
         <img 
@@ -17,6 +23,10 @@ export default function Producto({ producto}) {
             <button
                 type="button"
                 className="bg-indigo-600 hover:bg-indigo-800 text-white w-full mt-5 p-3 uppercase font-bold"
+                onClick={() => { 
+                    handleClickModal();
+                    handleSetProducto(producto);
+                }}
             >
                 Agregar        
             </button>
