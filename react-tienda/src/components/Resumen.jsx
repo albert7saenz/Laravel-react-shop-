@@ -1,9 +1,14 @@
+import { formateraDinero } from "../helpers";
 import useTienda from "../hooks/useTienda"
 import ResumenProducto from "./ResumenProducto";
 
 export default function Resumen() {
   
-  const {pedido} = useTienda();
+  const {pedido, total } = useTienda();
+
+  const comprobarPedido = () => pedido.length === 0
+
+  
   return (
     <aside className="w-72 h-screen overflow-y-scroll -5">
       <h1 className="text-4xl font-black">
@@ -30,13 +35,17 @@ export default function Resumen() {
 
       <p className="text-xl mt-10">
         Total: {''}
+        {formateraDinero(total)}
       </p>
 
       <form action="" className="w-full">
         <div className="mt-5">
           <input type="submit" 
-            className="bg-indigo-600 hover:bg-indigo-800 px-5 py-2 rounded uppercase font-bold text-white text-center w-full cursor-pointer"
+            className={`${comprobarPedido() ? 
+              'bg-indigo-100' : 
+              'bg-indigo-600 hover:bg-indigo-800'} px-5 py-2 rounded uppercase font-bold text-white text-center w-full cursor-pointer`}
             value="Confirmar pedido"
+            disabled={comprobarPedido()}
           />
         </div>
       </form>

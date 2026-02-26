@@ -15,8 +15,6 @@ export default function ModalProducto() {
             const productoEdicion = pedido.find(pedidoState => pedidoState.id === producto.id)
             setCantidad(productoEdicion.cantidad)
             setEdicion(true)
-        }else{
-            console.log('no esta')
         }
     }, [pedido])
     

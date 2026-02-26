@@ -1,4 +1,3 @@
-import { use } from "react"
 import useTienda from "../hooks/useTienda"
 
 export default function Categoria({ categoria }) {
