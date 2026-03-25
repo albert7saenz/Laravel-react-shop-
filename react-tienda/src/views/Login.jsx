@@ -1,11 +1,47 @@
+import { createRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import clienteAxios from '../config/axios'
+import Alerta from '../components/Alerta';
+
 export default function Login() {
-  return (
+
+    const emailRef = createRef();
+    const passwordRef = createRef();
+
+    const [ errores, setErrores] = useState([]);
+
+    const handleSubmit = async e => {
+        e.preventDefault();
+
+        const datos = {
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+        }
+        
+        console.log(datos)
+
+        try {
+            const {data} = await clienteAxios.post('/api/login', datos)
+            localStorage.setItem('AUTH_TOKEN', data.token)
+            setErrores([])
+        } catch (error) {
+            setErrores(Object.values(error.response.data.errors))
+        }
+    }
+
+
+    return (
     <>
     <h1 className="font-black text-4xl item-center ">Iniciar Sesion</h1>
     <p>Para crear un pedido debes iniciar sesion</p>
-      <div className="bg-white shadow-md rounded-md mt-10 px-5 py-10">
-            <form action="">
+        <div className="bg-white shadow-md rounded-md mt-10 px-5 py-10">
+            <form action=""
+                onSubmit={handleSubmit}
+                noValidate
+            >
+
+            {errores ? errores.map(error => <Alerta key={error}>{error}</Alerta>) : null }
+
                 <div className="mb-4">
                     <label htmlFor="email" className="text-slate-800">
                         Email:
@@ -16,6 +52,7 @@ export default function Login() {
                         name="email"
                         placeholder="Tu Email"
                         className="mt-5 w-full p-1 bg-gray-100"
+                        ref={emailRef}
                     />
                 </div>
                 <div className="mb-4 ">
@@ -28,6 +65,7 @@ export default function Login() {
                         name="password"
                         placeholder="Tu Password"
                         className="mt-5 w-full p-1 bg-gray-100"
+                        ref={passwordRef}
                     />
                 </div>
 
@@ -40,8 +78,8 @@ export default function Login() {
         </div>
 
         <nav className="mt-5">
-          <Link to="/auth/registro">No tienes cuenta? Registrate</Link>
+            <Link to="/auth/registro">No tienes cuenta? Registrate</Link>
         </nav>
     </>
-  )
-}
+    )
+    }
