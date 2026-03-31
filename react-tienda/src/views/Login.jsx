@@ -11,7 +11,7 @@ export default function Login() {
     const [ errores, setErrores] = useState([]);
 
     const { login } = useAuth({
-        middlewere: 'guest',
+        middleware: 'guest',
         url: '/'
     })
 

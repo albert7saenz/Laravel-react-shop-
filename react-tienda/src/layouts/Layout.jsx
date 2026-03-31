@@ -6,6 +6,7 @@ import Sidebar from '../components/Sidebar'
 import Resumen from '../components/Resumen'
 import ModalProducto from '../components/ModalProducto'
 import useTienda from '../hooks/useTienda'
+import { useAuth } from '../hooks/useAuth'
 
 
 const customStyles = {
@@ -19,10 +20,13 @@ const customStyles = {
   },
 };
 
+
 Modal.setAppElement('#root  ')
 
-export default function Layout() {
 
+export default function Layout() {
+  
+  const { user, error } = useAuth({middlewere:'auth'})
   const { modal } = useTienda();
 
 
