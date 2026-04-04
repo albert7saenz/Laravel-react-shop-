@@ -22,8 +22,6 @@ const TiendaProvider = ({ children }) => {
 
     const obtenerCategorias = async () => {
         try{
-            
-            // const {data} = await axios.get('http://localhost/api/categoria')
             const {data} = await clienteAxios('/api/categorias')
             setCategoria(data.data)
             setCategorialActual(data.data[0])
@@ -72,6 +70,32 @@ const TiendaProvider = ({ children }) => {
         toast.success('Eliminado del pedido')
         }
 
+    const hadleSubmitNuevaOrden = async () => {
+        const token = localStorage.getItem('AUTH_TOKEN')
+        try {
+            const {data} = await clienteAxios.post('/api/pedidos', {
+                total,
+                productos : pedido.map(producto => {
+                    return{
+                        id: producto.id,
+                        cantidad: producto.cantidad
+                    }
+                })
+            },{
+                headers: {
+                    Authorization: `Bearer ${token}` 
+                }
+            })
+
+            toast.success(data.message);
+            setTimeout(() =>{
+                setPedido([])
+            }, 1000)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     
     return (
         <TiendaContext.Provider
@@ -87,7 +111,8 @@ const TiendaProvider = ({ children }) => {
                 handleAgregarPedido,
                 handleEditarCantidad,
                 handleEliminarProductoPedido,
-                total
+                total,
+                hadleSubmitNuevaOrden
             }}
         >
         {children}   
