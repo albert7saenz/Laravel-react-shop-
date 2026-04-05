@@ -43,12 +43,12 @@ export default function Layout() {
         <Resumen /> 
       </div> 
 
-        <Modal isOpen={modal} style={customStyles}>
-          <ModalProducto>
+      <Modal isOpen={modal} style={customStyles}>
+        <ModalProducto>
 
-          </ModalProducto>
-        </Modal>
-      
+        </ModalProducto>
+      </Modal>
+    
       <ToastContainer/>
     </>
   )

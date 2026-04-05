@@ -17,7 +17,7 @@ export default function Sidebar() {
                     alt="imagen-logotipo" 
                 />
             </div>
-            <p className="my-10 text-xl text-center font-bold bg-blue-500 border rounded-lg  hover:bg-yellow-500  cursor-pointer">Hola: {user?.name}</p>
+            <p className="my-1 py-1 text-xl text-center font-bold bg-gray-400 border rounded-3xl">Hola {user?.name}</p>
             <div className="mt-10">
                 {categorias.map(categoria => (
                     <Categoria
