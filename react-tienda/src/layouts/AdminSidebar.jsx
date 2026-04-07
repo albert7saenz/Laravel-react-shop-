@@ -22,7 +22,7 @@ export default function AdminSidebar() {
         <div className="my-5 px-5">
             <button 
                 type="button"
-                className=""
+                className="bg-red-500 hover:bg-red-600 px-2 py-1 text-white font-bold rounded-sm"
                 onClick={logout}
             >
                 Cerrar Sesion

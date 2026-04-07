@@ -22,10 +22,7 @@ export default function Inicio() {
 
   return (
     <>
-    <h1 className="text-5xl font-bold ">{categoriaActual.nombre}</h1>
-    <p className="text-lg my-10">
-      Elige y personaliza tu pedido a continuacion.
-    </p>
+   
     <div className="grid gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
       {productos.map(producto =>(
           <Producto
