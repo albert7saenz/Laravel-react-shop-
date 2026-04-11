@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PedidoCollection;
 use App\Models\Pedido;
 use App\Models\PedidoProducto;
 use App\Models\Producto;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +18,7 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        return "todo listo pa";
+        return new PedidoCollection(Pedido::with('user')->with('productos')->where('estado', 0)->get());
     }
 
     /**
