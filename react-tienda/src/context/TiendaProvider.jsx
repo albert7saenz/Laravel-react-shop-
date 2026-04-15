@@ -96,6 +96,19 @@ const TiendaProvider = ({ children }) => {
         }
     }
 
+
+    const handleClickComprobarPedido = async id => {
+        const token = localStorage.getItem('AUTH_TOKEN')
+        try {
+            await clienteAxios.put(`api/pedidos/${id}`, null, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
     
     return (
         <TiendaContext.Provider
@@ -112,7 +125,8 @@ const TiendaProvider = ({ children }) => {
                 handleEditarCantidad,
                 handleEliminarProductoPedido,
                 total,
-                hadleSubmitNuevaOrden
+                hadleSubmitNuevaOrden,
+                handleClickComprobarPedido
             }}
         >
         {children}   
