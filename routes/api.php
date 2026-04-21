@@ -7,7 +7,7 @@ use App\Http\Controllers\ProductoController;
 use Illuminate\Auth\Events\Logout;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use LDAP\Result;
+
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function(Request $request) {
@@ -18,12 +18,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     //almacenar ordenes
     Route::apiResource('/pedidos', PedidoController::class);
+    
+    Route::apiResource('/categorias', CategoriaController::class);
+    Route::apiResource('/productos', ProductoController::class);
 });
-
-
-
-Route::apiResource('/categorias', CategoriaController::class);
-Route::apiResource('/productos', ProductoController::class);
 
 Route::post('/registro', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
